@@ -326,13 +326,21 @@
       </ol>
 
       <p id="footer">
-        {block:PreviousPage}
-          <a href="{PreviousPage}">&#171; Previous</a>
-        {/block:PreviousPage}
+        {block:Pagination}
+          <ul class="pager">
+            {block:PreviousPage}
+              <li class="previous">
+                <a href="{PreviousPage}">&#171; Newer</a>
+              </li>
+            {/block:PreviousPage}
 
-        {block:NextPage}
-          <a href="{NextPage}">Next &#187;</a>
-        {/block:NextPage}
+            {block:NextPage}
+              <li class="next">
+                <a href="{NextPage}">Older &#187;</a>
+              </li>
+            {/block:NextPage}
+          </ul>
+        {/block:Pagination}
       </p>
 
     </div> <!-- /container -->

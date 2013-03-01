@@ -64,6 +64,11 @@
             <ul class="nav">
               <li class="active"><a href="/">Home</a></li>
               <li><a href="/archive">Archive</a></li>
+              {block:HasPages}
+                {block:Pages}
+                  <li><a href="{URL}">{Label}</a></li>
+                {/block:Pages}
+              {/block:HasPages}
             </ul>
           </div><!--/.nav-collapse -->
         </div>

@@ -11,6 +11,8 @@
     {block:Description}
       <meta name="description" content="{MetaDescription}" />
     {/block:Description}
+
+    <!-- Twitter Bootstrap Styles -->
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -18,6 +20,7 @@
     </style>
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
 
+    <!-- Chinstrap Styles -->
     <style type="text/css">
       html, body {
         background-color: #DDDDDD;
@@ -43,10 +46,10 @@
       }
     </style>
 
+    <!-- Custom Styles -->
     <style type="text/css">
       {CustomCSS}
     </style>
-
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -58,6 +61,7 @@
   </head>
   <body>
 
+    <!-- Navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -85,8 +89,10 @@
       </div>
     </div>
 
+    <!-- Site Container -->
     <div class="container">
 
+      <!-- Hero Unit -->
       <div class="hero-unit">
         <h1>{Title}</h1>
         {block:Description}
@@ -94,31 +100,32 @@
         {/block:Description}
       </div>
 
+      <!-- Header for Tag Page -->
       {block:TagPage}
-        <h2>Posts tagged with <strong>{Tag}</strong></h2>
+        <h2>Posts tagged with "{Tag}"</h2>
       {/block:TagPage}
 
-
+      <!--  Header for Search Page -->
       {block:SearchPage}
         {block:SearchResults}
-          <div id="searchresults"><strong>{SearchResultCount}</strong> results for <strong>{SearchQuery}</strong></div>
+          <h2>Results for "{SearchQuery}"</h2>
         {/block:SearchResults}
 
         {block:NoSearchResults}
-          <div id="searchresults">No search results for <strong>{SearchQuery}</strong></div>
+          <h2>No search results for "{SearchQuery}"</h2>
         {/block:NoSearchResults}
       {/block:SearchPage}
 
       <!-- If Day Page -->
       {block:DayPage}
-        <h2>Posts for {Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}</h2>
+        <h2>Posts for "{Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}"</h2>
       {/block:DayPage}
 
-
-
-
+      <!-- Posts -->
       <ol id="posts" class="unstyled">
         {block:Posts}
+
+          <!-- Text Post Type -->
           {block:Text}
             <li class="post text">
               <div class="post-body">
@@ -169,6 +176,7 @@
             </li>
           {/block:Text}
 
+          <!-- Photo Post Type -->
           {block:Photo}
             <li class="post photo">
               <div class="post-body">
@@ -219,6 +227,7 @@
             </li>
           {/block:Photo}
 
+          <!-- Panorama Post Type -->
           {block:Panorama}
             <li class="post panorama">
               <div class="post-body">
@@ -271,6 +280,7 @@
             </li>
           {/block:Panorama}
 
+          <!-- Photoset Post Type -->
           {block:Photoset}
             <li class="post photoset">
               <div class="post-body">
@@ -321,6 +331,7 @@
             </li>
           {/block:Photoset}
 
+          <!-- Quote Post Type -->
           {block:Quote}
             <li class="post quote">
               <div class="post-body">
@@ -371,6 +382,7 @@
             </li>
           {/block:Quote}
 
+          <!-- Link Post Type -->
           {block:Link}
             <li class="post link">
               <div class="post-body">
@@ -421,6 +433,7 @@
             </li>
           {/block:Link}
 
+          <!-- Chat Post Type -->
           {block:Chat}
             <li class="post chat">
               <div class="post-body">
@@ -481,6 +494,7 @@
             </li>
           {/block:Chat}
 
+          <!-- Video Post Type -->
           {block:Video}
             <li class="post video">
               <div class="post-body">
@@ -531,6 +545,7 @@
             </li>
           {/block:Video}
 
+          <!-- Audio Post Type -->
           {block:Audio}
             <li class="post audio">
               <div class="post-body">
@@ -584,25 +599,22 @@
         {/block:Posts}
       </ol> <!-- /Posts -->
 
-      <p id="footer">
+      <!-- Pagination -->
+      <p>
         {block:Pagination}
           <ul class="pager">
             {block:PreviousPage}
-              <li class="previous">
-                <a href="{PreviousPage}">&#171; Newer</a>
-              </li>
+              <li class="previous"><a href="{PreviousPage}">&#171; Newer</a></li>
             {/block:PreviousPage}
 
             {block:NextPage}
-              <li class="next">
-                <a href="{NextPage}">Older &#187;</a>
-              </li>
+              <li class="next"><a href="{NextPage}">Older &#187;</a></li>
             {/block:NextPage}
           </ul>
         {/block:Pagination}
       </p>
 
-    </div> <!-- /container -->
+    </div> <!-- /Site Container -->
 
     <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>

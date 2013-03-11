@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{Title}</title>
+    <title>
+      {Title}
+      {block:SearchPage} ({lang:Search results for SearchQuery}){/block:SearchPage}
+      {block:PermalinkPage}{block:PostSummary} — {PostSummary}{/block:PostSummary}{/block:PermalinkPage}
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {block:Description}
       <meta name="description" content="{MetaDescription}" />

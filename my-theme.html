@@ -94,6 +94,11 @@
         {/block:Description}
       </div>
 
+      {block:TagPage}
+        <h2>Posts tagged with <strong>{Tag}</strong></h2>
+      {/block:TagPage}
+
+
       {block:SearchPage}
         {block:SearchResults}
           <div id="searchresults"><strong>{SearchResultCount}</strong> results for <strong>{SearchQuery}</strong></div>
@@ -103,6 +108,14 @@
           <div id="searchresults">No search results for <strong>{SearchQuery}</strong></div>
         {/block:NoSearchResults}
       {/block:SearchPage}
+
+      <!-- If Day Page -->
+      {block:DayPage}
+        <h2>Posts for {Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}</h2>
+      {/block:DayPage}
+
+
+
 
       <ol id="posts" class="unstyled">
         {block:Posts}

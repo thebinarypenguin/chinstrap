@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
+    <meta name="if:Show hero unit" content="1">
+    <meta name="if:Show title" content="1">
+    <meta name="if:Show description" content="1">
+    <meta name="if:Show permalinks" content="1">
+    <meta name="if:Show dates" content="1">
+    <meta name="if:Show notes" content="1">
+    <meta name="if:Show tags" content="1">
+
     <meta charset="utf-8">
     <title>
       {Title}
@@ -93,12 +102,21 @@
     <div class="container">
 
       <!-- Hero Unit -->
-      <div class="hero-unit">
-        <h1>{Title}</h1>
-        {block:Description}
-          <p id="description">{Description}</p>
-        {/block:Description}
-      </div>
+      {block:IfShowHeroUnit}
+        <div class="hero-unit">
+
+          <!-- Title -->
+          {block:IfShowTitle}
+            <h1>{Title}</h1>
+          {/block:IfShowTitle}
+
+          <!-- Description -->
+          {block:IfShowDescription}
+            {block:Description}<p>{Description}</p>{/block:Description}
+          {block:IfShowDescription}
+
+        </div>
+      {/block:IfShowHeroUnit}
 
       <!-- Header for Tag Page -->
       {block:TagPage}
@@ -116,7 +134,7 @@
         {/block:NoSearchResults}
       {/block:SearchPage}
 
-      <!-- If Day Page -->
+      <!-- Header for Day Page -->
       {block:DayPage}
         <h2>Posts for "{Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}"</h2>
       {/block:DayPage}
@@ -138,40 +156,50 @@
 
               <div class="post-footer">
                 <!-- Permalink -->
-                <i class="icon-globe"></i>
-                <a href="{Permalink}">Permalink</a>
-                &nbsp; &nbsp; &nbsp;
+                {block:IfShowPermalinks}
+                  <i class="icon-globe"></i>
+                  <a href="{Permalink}">Permalink</a>
+                  &nbsp; &nbsp; &nbsp;
+                {/block:IfShowPermalinks}
 
                 <!-- Date -->
-                {block:Date}
-                  <i class="icon-calendar"></i>
-                  <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
-                    {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
-                  </a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:Date}
+                {block:IfShowDates}
+                  {block:Date}
+                    <i class="icon-calendar"></i>
+                    <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
+                      {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
+                    </a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:Date}
+                {/block:IfShowDates}
 
                 <!-- Notes (Count) -->
-                {block:NoteCount}
-                  <i class="icon-comment"></i>
-                  <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:NoteCount}
+                {block:IfShowNotes}
+                  {block:NoteCount}
+                    <i class="icon-comment"></i>
+                    <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:NoteCount}
+                {/block:IfShowNotes}
 
                 <!-- Tags -->
-                {block:HasTags}
-                  <i class="icon-tags"></i>
-                  {block:Tags}
-                    <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
-                  {/block:Tags}
-                   &nbsp; &nbsp; &nbsp;
-                {/block:HasTags}
+                {block:IfShowTags}
+                  {block:HasTags}
+                    <i class="icon-tags"></i>
+                    {block:Tags}
+                      <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
+                    {/block:Tags}
+                     &nbsp; &nbsp; &nbsp;
+                  {/block:HasTags}
+                {/block:IfShowTags}
 
                 <!-- Notes (List) -->
-                {block:PostNotes}
-                  <br><br>
-                  <div class="post-notes">{PostNotes}</div>
-                {block:PostNotes}
+                {block:IfShowNotes}
+                  {block:PostNotes}
+                    <br><br>
+                    <div class="post-notes">{PostNotes}</div>
+                  {block:PostNotes}
+                {/block:IfShowNotes}
               </div>
             </li>
           {/block:Text}
@@ -189,40 +217,50 @@
 
               <div class="post-footer">
                 <!-- Permalink -->
-                <i class="icon-globe"></i>
-                <a href="{Permalink}">Permalink</a>
-                &nbsp; &nbsp; &nbsp;
+                {block:IfShowPermalinks}
+                  <i class="icon-globe"></i>
+                  <a href="{Permalink}">Permalink</a>
+                  &nbsp; &nbsp; &nbsp;
+                {/block:IfShowPermalinks}
 
                 <!-- Date -->
-                {block:Date}
-                  <i class="icon-calendar"></i>
-                  <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
-                    {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
-                  </a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:Date}
+                {block:IfShowDates}
+                  {block:Date}
+                    <i class="icon-calendar"></i>
+                    <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
+                      {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
+                    </a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:Date}
+                {/block:IfShowDates}
 
                 <!-- Notes (Count) -->
-                {block:NoteCount}
-                  <i class="icon-comment"></i>
-                  <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:NoteCount}
+                {block:IfShowNotes}
+                  {block:NoteCount}
+                    <i class="icon-comment"></i>
+                    <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:NoteCount}
+                {/block:IfShowNotes}
 
                 <!-- Tags -->
-                {block:HasTags}
-                  <i class="icon-tags"></i>
-                  {block:Tags}
-                    <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
-                  {/block:Tags}
-                   &nbsp; &nbsp; &nbsp;
-                {/block:HasTags}
+                {block:IfShowTags}
+                  {block:HasTags}
+                    <i class="icon-tags"></i>
+                    {block:Tags}
+                      <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
+                    {/block:Tags}
+                     &nbsp; &nbsp; &nbsp;
+                  {/block:HasTags}
+                {/block:IfShowTags}
 
                 <!-- Notes (List) -->
-                {block:PostNotes}
-                  <br><br>
-                  <div class="post-notes">{PostNotes}</div>
-                {block:PostNotes}
+                {block:IfShowNotes}
+                  {block:PostNotes}
+                    <br><br>
+                    <div class="post-notes">{PostNotes}</div>
+                  {block:PostNotes}
+                {/block:IfShowNotes}
               </div>
             </li>
           {/block:Photo}
@@ -242,40 +280,50 @@
 
               <div class="post-footer">
                 <!-- Permalink -->
-                <i class="icon-globe"></i>
-                <a href="{Permalink}">Permalink</a>
-                &nbsp; &nbsp; &nbsp;
+                {block:IfShowPermalinks}
+                  <i class="icon-globe"></i>
+                  <a href="{Permalink}">Permalink</a>
+                  &nbsp; &nbsp; &nbsp;
+                {/block:IfShowPermalinks}
 
                 <!-- Date -->
-                {block:Date}
-                  <i class="icon-calendar"></i>
-                  <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
-                    {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
-                  </a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:Date}
+                {block:IfShowDates}
+                  {block:Date}
+                    <i class="icon-calendar"></i>
+                    <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
+                      {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
+                    </a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:Date}
+                {/block:IfShowDates}
 
                 <!-- Notes (Count) -->
-                {block:NoteCount}
-                  <i class="icon-comment"></i>
-                  <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:NoteCount}
+                {block:IfShowNotes}
+                  {block:NoteCount}
+                    <i class="icon-comment"></i>
+                    <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:NoteCount}
+                {/block:IfShowNotes}
 
                 <!-- Tags -->
-                {block:HasTags}
-                  <i class="icon-tags"></i>
-                  {block:Tags}
-                    <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
-                  {/block:Tags}
-                   &nbsp; &nbsp; &nbsp;
-                {/block:HasTags}
+                {block:IfShowTags}
+                  {block:HasTags}
+                    <i class="icon-tags"></i>
+                    {block:Tags}
+                      <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
+                    {/block:Tags}
+                     &nbsp; &nbsp; &nbsp;
+                  {/block:HasTags}
+                {/block:IfShowTags}
 
                 <!-- Notes (List) -->
-                {block:PostNotes}
-                  <br><br>
-                  <div class="post-notes">{PostNotes}</div>
-                {block:PostNotes}
+                {block:IfShowNotes}
+                  {block:PostNotes}
+                    <br><br>
+                    <div class="post-notes">{PostNotes}</div>
+                  {block:PostNotes}
+                {/block:IfShowNotes}
               </div>
             </li>
           {/block:Panorama}
@@ -293,40 +341,50 @@
 
               <div class="post-footer">
                 <!-- Permalink -->
-                <i class="icon-globe"></i>
-                <a href="{Permalink}">Permalink</a>
-                &nbsp; &nbsp; &nbsp;
+                {block:IfShowPermalinks}
+                  <i class="icon-globe"></i>
+                  <a href="{Permalink}">Permalink</a>
+                  &nbsp; &nbsp; &nbsp;
+                {/block:IfShowPermalinks}
 
                 <!-- Date -->
-                {block:Date}
-                  <i class="icon-calendar"></i>
-                  <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
-                    {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
-                  </a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:Date}
+                {block:IfShowDates}
+                  {block:Date}
+                    <i class="icon-calendar"></i>
+                    <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
+                      {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
+                    </a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:Date}
+                {/block:IfShowDates}
 
                 <!-- Notes (Count) -->
-                {block:NoteCount}
-                  <i class="icon-comment"></i>
-                  <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:NoteCount}
+                {block:IfShowNotes}
+                  {block:NoteCount}
+                    <i class="icon-comment"></i>
+                    <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:NoteCount}
+                {/block:IfShowNotes}
 
                 <!-- Tags -->
-                {block:HasTags}
-                  <i class="icon-tags"></i>
-                  {block:Tags}
-                    <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
-                  {/block:Tags}
-                   &nbsp; &nbsp; &nbsp;
-                {/block:HasTags}
+                {block:IfShowTags}
+                  {block:HasTags}
+                    <i class="icon-tags"></i>
+                    {block:Tags}
+                      <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
+                    {/block:Tags}
+                     &nbsp; &nbsp; &nbsp;
+                  {/block:HasTags}
+                {/block:IfShowTags}
 
                 <!-- Notes (List) -->
-                {block:PostNotes}
-                  <br><br>
-                  <div class="post-notes">{PostNotes}</div>
-                {block:PostNotes}
+                {block:IfShowNotes}
+                  {block:PostNotes}
+                    <br><br>
+                    <div class="post-notes">{PostNotes}</div>
+                  {block:PostNotes}
+                {/block:IfShowNotes}
               </div>
             </li>
           {/block:Photoset}
@@ -344,40 +402,50 @@
 
               <div class="post-footer">
                 <!-- Permalink -->
-                <i class="icon-globe"></i>
-                <a href="{Permalink}">Permalink</a>
-                &nbsp; &nbsp; &nbsp;
+                {block:IfShowPermalinks}
+                  <i class="icon-globe"></i>
+                  <a href="{Permalink}">Permalink</a>
+                  &nbsp; &nbsp; &nbsp;
+                {/block:IfShowPermalinks}
 
                 <!-- Date -->
-                {block:Date}
-                  <i class="icon-calendar"></i>
-                  <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
-                    {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
-                  </a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:Date}
+                {block:IfShowDates}
+                  {block:Date}
+                    <i class="icon-calendar"></i>
+                    <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
+                      {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
+                    </a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:Date}
+                {/block:IfShowDates}
 
                 <!-- Notes (Count) -->
-                {block:NoteCount}
-                  <i class="icon-comment"></i>
-                  <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:NoteCount}
+                {block:IfShowNotes}
+                  {block:NoteCount}
+                    <i class="icon-comment"></i>
+                    <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:NoteCount}
+                {/block:IfShowNotes}
 
                 <!-- Tags -->
-                {block:HasTags}
-                  <i class="icon-tags"></i>
-                  {block:Tags}
-                    <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
-                  {/block:Tags}
-                   &nbsp; &nbsp; &nbsp;
-                {/block:HasTags}
+                {block:IfShowTags}
+                  {block:HasTags}
+                    <i class="icon-tags"></i>
+                    {block:Tags}
+                      <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
+                    {/block:Tags}
+                     &nbsp; &nbsp; &nbsp;
+                  {/block:HasTags}
+                {/block:IfShowTags}
 
                 <!-- Notes (List) -->
-                {block:PostNotes}
-                  <br><br>
-                  <div class="post-notes">{PostNotes}</div>
-                {block:PostNotes}
+                {block:IfShowNotes}
+                  {block:PostNotes}
+                    <br><br>
+                    <div class="post-notes">{PostNotes}</div>
+                  {block:PostNotes}
+                {/block:IfShowNotes}
               </div>
             </li>
           {/block:Quote}
@@ -395,40 +463,50 @@
 
               <div class="post-footer">
                 <!-- Permalink -->
-                <i class="icon-globe"></i>
-                <a href="{Permalink}">Permalink</a>
-                &nbsp; &nbsp; &nbsp;
+                {block:IfShowPermalinks}
+                  <i class="icon-globe"></i>
+                  <a href="{Permalink}">Permalink</a>
+                  &nbsp; &nbsp; &nbsp;
+                {/block:IfShowPermalinks}
 
                 <!-- Date -->
-                {block:Date}
-                  <i class="icon-calendar"></i>
-                  <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
-                    {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
-                  </a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:Date}
+                {block:IfShowDates}
+                  {block:Date}
+                    <i class="icon-calendar"></i>
+                    <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
+                      {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
+                    </a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:Date}
+                {/block:IfShowDates}
 
                 <!-- Notes (Count) -->
-                {block:NoteCount}
-                  <i class="icon-comment"></i>
-                  <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:NoteCount}
+                {block:IfShowNotes}
+                  {block:NoteCount}
+                    <i class="icon-comment"></i>
+                    <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:NoteCount}
+                {/block:IfShowNotes}
 
                 <!-- Tags -->
-                {block:HasTags}
-                  <i class="icon-tags"></i>
-                  {block:Tags}
-                    <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
-                  {/block:Tags}
-                   &nbsp; &nbsp; &nbsp;
-                {/block:HasTags}
+                {block:IfShowTags}
+                  {block:HasTags}
+                    <i class="icon-tags"></i>
+                    {block:Tags}
+                      <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
+                    {/block:Tags}
+                     &nbsp; &nbsp; &nbsp;
+                  {/block:HasTags}
+                {/block:IfShowTags}
 
                 <!-- Notes (List) -->
-                {block:PostNotes}
-                  <br><br>
-                  <div class="post-notes">{PostNotes}</div>
-                {block:PostNotes}
+                {block:IfShowNotes}
+                  {block:PostNotes}
+                    <br><br>
+                    <div class="post-notes">{PostNotes}</div>
+                  {block:PostNotes}
+                {/block:IfShowNotes}
               </div>
             </li>
           {/block:Link}
@@ -456,40 +534,50 @@
 
               <div class="post-footer">
                 <!-- Permalink -->
-                <i class="icon-globe"></i>
-                <a href="{Permalink}">Permalink</a>
-                &nbsp; &nbsp; &nbsp;
+                {block:IfShowPermalinks}
+                  <i class="icon-globe"></i>
+                  <a href="{Permalink}">Permalink</a>
+                  &nbsp; &nbsp; &nbsp;
+                {/block:IfShowPermalinks}
 
                 <!-- Date -->
-                {block:Date}
-                  <i class="icon-calendar"></i>
-                  <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
-                    {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
-                  </a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:Date}
+                {block:IfShowDates}
+                  {block:Date}
+                    <i class="icon-calendar"></i>
+                    <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
+                      {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
+                    </a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:Date}
+                {/block:IfShowDates}
 
                 <!-- Notes (Count) -->
-                {block:NoteCount}
-                  <i class="icon-comment"></i>
-                  <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:NoteCount}
+                {block:IfShowNotes}
+                  {block:NoteCount}
+                    <i class="icon-comment"></i>
+                    <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:NoteCount}
+                {/block:IfShowNotes}
 
                 <!-- Tags -->
-                {block:HasTags}
-                  <i class="icon-tags"></i>
-                  {block:Tags}
-                    <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
-                  {/block:Tags}
-                   &nbsp; &nbsp; &nbsp;
-                {/block:HasTags}
+                {block:IfShowTags}
+                  {block:HasTags}
+                    <i class="icon-tags"></i>
+                    {block:Tags}
+                      <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
+                    {/block:Tags}
+                     &nbsp; &nbsp; &nbsp;
+                  {/block:HasTags}
+                {/block:IfShowTags}
 
                 <!-- Notes (List) -->
-                {block:PostNotes}
-                  <br><br>
-                  <div class="post-notes">{PostNotes}</div>
-                {block:PostNotes}
+                {block:IfShowNotes}
+                  {block:PostNotes}
+                    <br><br>
+                    <div class="post-notes">{PostNotes}</div>
+                  {block:PostNotes}
+                {/block:IfShowNotes}
               </div>
             </li>
           {/block:Chat}
@@ -507,40 +595,50 @@
 
               <div class="post-footer">
                 <!-- Permalink -->
-                <i class="icon-globe"></i>
-                <a href="{Permalink}">Permalink</a>
-                &nbsp; &nbsp; &nbsp;
+                {block:IfShowPermalinks}
+                  <i class="icon-globe"></i>
+                  <a href="{Permalink}">Permalink</a>
+                  &nbsp; &nbsp; &nbsp;
+                {/block:IfShowPermalinks}
 
                 <!-- Date -->
-                {block:Date}
-                  <i class="icon-calendar"></i>
-                  <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
-                    {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
-                  </a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:Date}
+                {block:IfShowDates}
+                  {block:Date}
+                    <i class="icon-calendar"></i>
+                    <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
+                      {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
+                    </a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:Date}
+                {/block:IfShowDates}
 
                 <!-- Notes (Count) -->
-                {block:NoteCount}
-                  <i class="icon-comment"></i>
-                  <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:NoteCount}
+                {block:IfShowNotes}
+                  {block:NoteCount}
+                    <i class="icon-comment"></i>
+                    <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:NoteCount}
+                {/block:IfShowNotes}
 
                 <!-- Tags -->
-                {block:HasTags}
-                  <i class="icon-tags"></i>
-                  {block:Tags}
-                    <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
-                  {/block:Tags}
-                   &nbsp; &nbsp; &nbsp;
-                {/block:HasTags}
+                {block:IfShowTags}
+                  {block:HasTags}
+                    <i class="icon-tags"></i>
+                    {block:Tags}
+                      <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
+                    {/block:Tags}
+                     &nbsp; &nbsp; &nbsp;
+                  {/block:HasTags}
+                {/block:IfShowTags}
 
                 <!-- Notes (List) -->
-                {block:PostNotes}
-                  <br><br>
-                  <div class="post-notes">{PostNotes}</div>
-                {block:PostNotes}
+                {block:IfShowNotes}
+                  {block:PostNotes}
+                    <br><br>
+                    <div class="post-notes">{PostNotes}</div>
+                  {block:PostNotes}
+                {/block:IfShowNotes}
               </div>
             </li>
           {/block:Video}
@@ -558,40 +656,50 @@
 
               <div class="post-footer">
                 <!-- Permalink -->
-                <i class="icon-globe"></i>
-                <a href="{Permalink}">Permalink</a>
-                &nbsp; &nbsp; &nbsp;
+                {block:IfShowPermalinks}
+                  <i class="icon-globe"></i>
+                  <a href="{Permalink}">Permalink</a>
+                  &nbsp; &nbsp; &nbsp;
+                {/block:IfShowPermalinks}
 
                 <!-- Date -->
-                {block:Date}
-                  <i class="icon-calendar"></i>
-                  <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
-                    {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
-                  </a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:Date}
+                {block:IfShowDates}
+                  {block:Date}
+                    <i class="icon-calendar"></i>
+                    <a href="day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">
+                      {ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year}
+                    </a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:Date}
+                {/block:IfShowDates}
 
                 <!-- Notes (Count) -->
-                {block:NoteCount}
-                  <i class="icon-comment"></i>
-                  <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
-                  &nbsp; &nbsp; &nbsp;
-                {/block:NoteCount}
+                {block:IfShowNotes}
+                  {block:NoteCount}
+                    <i class="icon-comment"></i>
+                    <a href="{Permalink}#notes">{NoteCountWithLabel}</a>
+                    &nbsp; &nbsp; &nbsp;
+                  {/block:NoteCount}
+                {/block:IfShowNotes}
 
                 <!-- Tags -->
-                {block:HasTags}
-                  <i class="icon-tags"></i>
-                  {block:Tags}
-                    <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
-                  {/block:Tags}
-                   &nbsp; &nbsp; &nbsp;
-                {/block:HasTags}
+                {block:IfShowTags}
+                  {block:HasTags}
+                    <i class="icon-tags"></i>
+                    {block:Tags}
+                      <a href="{TagURL}"><span class="label label-info">{Tag}</span></a>
+                    {/block:Tags}
+                     &nbsp; &nbsp; &nbsp;
+                  {/block:HasTags}
+                {/block:IfShowTags}
 
                 <!-- Notes (List) -->
-                {block:PostNotes}
-                  <br><br>
-                  <div class="post-notes">{PostNotes}</div>
-                {block:PostNotes}
+                {block:IfShowNotes}
+                  {block:PostNotes}
+                    <br><br>
+                    <div class="post-notes">{PostNotes}</div>
+                  {block:PostNotes}
+                {/block:IfShowNotes}
               </div>
             </li>
           {/block:Audio}

@@ -41,18 +41,19 @@
       html, body {
         background-color: #DDDDDD;
       }
-      #posts {
-        margin: 0;
+      .media-mat {
+        background-color: #111111;
+        border-radius: 6px;
+        text-align: center;
+        margin: 0 0 10px 0;
       }
-      #posts .post {
+
+      .post {
         background-color: #ffffff;
         border: 1px solid #999999;
         border-radius: 6px 6px 6px 6px;
         margin: 18px 0 18px 0;
         padding: 0;
-      }
-      .post-body {
-        padding: 12px 12px 9px 12px;
       }
       .post-footer {
         background-color: #EEEEEE;
@@ -65,6 +66,45 @@
         list-style: none outside none;
         margin-left: 0;
       }
+
+
+
+      /* Text Post Type */
+      li.text .post-body { padding: 12px 18px 6px 18px; }
+      li.text h3         { margin: 0 0 3px 0; }
+
+      /* Quote Post Type */
+      li.quote .post-body { padding: 18px 18px 12px 18px; }
+      li.quote blockquote { margin: 0; padding: 0; border: 0;}
+
+      /* Link Post Type */
+      li.link .post-body { padding: 18px 18px 6px 18px; }
+      li.link h3         { margin: 0 0 16px 0; }
+
+      /* Chat Post Type */
+      li.chat .post-body { padding: 12px 18px 16px 18px; }
+      li.chat h3         { margin: 0 0 3px 0; }
+      li.chat ul         { margin-left: 9px; }
+      li.chat li         { line-height: 24px }
+
+      /* Photo Post Type */
+      li.photo .post-body { padding: 12px 12px 0 12px; }
+
+      /* Panorama Post Type */
+      li.panorama .post-body { padding: 12px 12px 0 12px; }
+
+      /* Photoset Post Type */
+      li.photoset .post-body { padding: 12px 12px 0 12px; }
+
+      /* Video Post Type */
+      li.video .post-body { padding: 12px 12px 0 12px; }
+
+      /* Audio Post Type */
+      li.audio .post-body        { padding: 18px 18px 6px 18px; }
+      li.audio .media            { margin: 0 0 10px 0; }
+      li.audio .media-object     { width: 128px; height: 128px; }
+      li.audio .media-body .lead { margin: 0; }
+
     </style>
 
     <!-- Custom Styles -->
@@ -160,7 +200,7 @@
             <li class="post text">
               <div class="post-body">
                 {block:Title}
-                  <h3><a href="{Permalink}">{Title}</a></h3>
+                  <h3>{Title}</h3>
                 {/block:Title}
 
                 {Body}
@@ -225,10 +265,12 @@
           {block:Photo}
             <li class="post photo">
               <div class="post-body">
-                <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+                <div class="media-mat">
+                  <img src="{PhotoURL-500}" alt="{PhotoAlt}">
+                </div>
 
                 {block:Caption}
-                  <div class="caption">{Caption}</div>
+                  {Caption}
                 {/block:Caption}
               </div>
 
@@ -290,12 +332,14 @@
           {block:Panorama}
             <li class="post panorama">
               <div class="post-body">
-                {LinkOpenTag}
-                  <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
-                {LinkCloseTag}
+                <div class="media-mat">
+                  {LinkOpenTag}
+                    <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
+                  {LinkCloseTag}
+                </div>
 
                 {block:Caption}
-                  <div class="caption">{Caption}</div>
+                  {Caption}
                 {/block:Caption}
               </div>
 
@@ -357,10 +401,10 @@
           {block:Photoset}
             <li class="post photoset">
               <div class="post-body">
-                {Photoset-500}
+                <div class="media-mat">{Photoset-500}</div>
 
                 {block:Caption}
-                  <div class="caption">{Caption}</div>
+                  {Caption}
                 {/block:Caption}
               </div>
 
@@ -422,11 +466,10 @@
           {block:Quote}
             <li class="post quote">
               <div class="post-body">
-                "{Quote}"
-
-                {block:Source}
-                  <div class="source">{Source}</div>
-                {/block:Source}
+                <blockquote>
+                  <p>{Quote}</p>
+                  {block:Source}<small>{Source}</small>{/block:Source}
+                </blockquote>
               </div>
 
               <!-- If post has a date, then it is a regular post that deserves a footer -->
@@ -487,10 +530,13 @@
           {block:Link}
             <li class="post link">
               <div class="post-body">
-                <a href="{URL}" class="link" {Target}>{Name}</a>
+                <h3><a href="{URL}" class="btn btn-large btn-info" {Target}>
+                  {Name} &nbsp; <i class="icon-circle-arrow-right"></i>
+                </a>
+                </h3>
 
                 {block:Description}
-                  <div class="description">{Description}</div>
+                  {Description}
                 {/block:Description}
               </div>
 
@@ -553,14 +599,14 @@
             <li class="post chat">
               <div class="post-body">
                 {block:Title}
-                  <h3><a href="{Permalink}">{Title}</a></h3>
+                  <h3>{Title}</h3>
                 {/block:Title}
 
-                <ul class="chat">
+                <ul class="unstyled">
                   {block:Lines}
                     <li class="{Alt} user_{UserNumber}">
                       {block:Label}
-                        <span class="label">{Label}</span>
+                        <strong>{Label}</strong>
                       {/block:Label}
 
                       {Line}
@@ -627,10 +673,12 @@
           {block:Video}
             <li class="post video">
               <div class="post-body">
+                <div class="media-mat">
                 {Video-500}
+                </div>
 
                 {block:Caption}
-                  <div class="caption">{Caption}</div>
+                  {Caption}
                 {/block:Caption}
               </div>
 
@@ -692,10 +740,28 @@
           {block:Audio}
             <li class="post audio">
               <div class="post-body">
-                {AudioPlayerBlack}
+                <div class="media">
+                  {block:AlbumArt}
+                    <img class="media-object pull-left thumbnail" src="{AlbumArtURL}">
+                  {block:AlbumArt}
+
+                  <div class="media-body">
+                    {block:TrackName}
+                      <p class="lead">{TrackName}</p>
+                    {/block:TrackName}
+
+                    {block:Artist}
+                      <p class="muted">{Artist}</p>
+                    {/block:Artist}
+
+                    {block:AudioPlayer}
+                      {AudioPlayerGrey}
+                    {block:AudioPlayer}
+                  </div>
+                </div>
 
                 {block:Caption}
-                  <div class="caption">{Caption}</div>
+                  {Caption}
                 {/block:Caption}
               </div>
 

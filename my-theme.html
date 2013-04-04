@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
 
+    <!-- Customization Options-->
     <meta name="if:Show hero unit" content="1">
     <meta name="if:Show title" content="1">
     <meta name="if:Show description" content="1">
@@ -36,11 +37,13 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome-ie7.css" rel="stylesheet">
     <![endif]-->
 
-    <!-- Chinstrap Styles -->
+    <!-- Theme Styles -->
     <style type="text/css">
       html, body {
         background-color: #DDDDDD;
       }
+
+      /* A styled container for pictures and videos */
       .media-mat {
         background-color: #111111;
         border-radius: 6px;
@@ -48,6 +51,7 @@
         margin: 0 0 10px 0;
       }
 
+      /* The post container */
       .post {
         background-color: #ffffff;
         border: 1px solid #999999;
@@ -55,18 +59,23 @@
         margin: 18px 0 18px 0;
         padding: 0;
       }
+
+      /* Post footer that contains the meta data */
       .post-footer {
         background-color: #EEEEEE;
         border-top: 1px solid #CCCCCC;
         border-radius: 0 0 6px 6px;
         padding: 9px 12px 9px 12px;
       }
+
+      /* List of post notes usually found on permalink pages */
+      /* NOTE: I don't have access to the <ol> directly to
+         style it so I had to make an arbitrary container for it */
       .post-notes ol {
         /* The equivalent of using the bootstrap class "unstyled" */
         list-style: none outside none;
         margin-left: 0;
       }
-
 
 
       /* Text Post Type */
@@ -104,7 +113,6 @@
       li.audio .media            { margin: 0 0 10px 0; }
       li.audio .media-object     { width: 128px; height: 128px; }
       li.audio .media-body .lead { margin: 0; }
-
     </style>
 
     <!-- Custom Styles -->
@@ -850,6 +858,7 @@
 
     </div> <!-- /Site Container -->
 
+    <!-- jQuery and Twitter Bootstrap's JS components -->
     <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
   </body>
